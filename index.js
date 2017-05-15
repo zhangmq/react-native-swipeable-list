@@ -1,13 +1,4 @@
-import SwipeableList from './SwipeableList';
-import SwipeableItem from './SwipeableItem';
-import {
-  listWithSwipeable,
-  itemWithSwipeable,
-} from './helpers';
-
-export default {
-  SwipeableList,
-  SwipeableItem,
-  listWithSwipeable,
-  itemWithSwipeable,
-};
+export SwipeableList from './SwipeableList';
+export SwipeableItem from './SwipeableItem';
+export listWithSwipeable from './listWithSwipeable';
+export itemWithSwipeable from './itemWithSwipeable';

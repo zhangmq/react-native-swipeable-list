@@ -2,8 +2,6 @@ import {
   compose,
   withState,
   lifecycle,
-  pure,
-  shallowEqual,
 } from 'recompose';
 import {
   PanResponder,
@@ -12,23 +10,7 @@ import {
 
 const ANIMATE_DURATION = 300;
 
-export const listWithSwipeable = compose(
-  pure,
-  withState('panning', 'setPanning', null),
-  lifecycle({
-    componentWillMount() {
-      this.state = {};
-      this.state.panResponder = PanResponder.create({
-        onStartShouldSetPanResponderCapture: () => this.props.panning,
-        onStartShouldSetPanResponder: () => this.props.panning,
-        onPanResponderGrant: () => {
-          this.props.setPanning(() => null);
-        },
-        onPanResponderTerminationRequest: () => false,
-      });
-    },
-  }),
-);
+
 
 export const itemWithSwipeable = compose(
   withState('active', 'setActive', 0),
@@ -104,8 +86,5 @@ export const itemWithSwipeable = compose(
         || nextProps.panning !== this.props.panning
         || nextProps.active !== this.props.active;
     },
-    componentDidUpdate() {
-      console.log(this.props.item, 'updated');
-    }
   }),
 );
