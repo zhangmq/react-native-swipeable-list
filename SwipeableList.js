@@ -3,7 +3,7 @@ import {
   FlatList,
   View,
 } from 'react-native';
-import { listWithSwipeable } from './helpers';
+import { listWithSwipeable } from './listWithSwipeable';
 
 const SwipeableList = listWithSwipeable(({ 
   panning,
