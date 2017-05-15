@@ -3,7 +3,7 @@ import {
   Animated,
   View,
 } from 'react-native';
-import { itemWithSwipeable } from './itemWithSwipeable';
+import itemWithSwipeable from './itemWithSwipeable';
 
 const CONTENT_TRANSLATEX = 8;
 
