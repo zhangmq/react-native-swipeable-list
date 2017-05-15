@@ -1,4 +1,11 @@
-export SwipeableList from './SwipeableList';
-export SwipeableItem from './SwipeableItem';
-export listWithSwipeable from './listWithSwipeable';
-export itemWithSwipeable from './itemWithSwipeable';
+import SwipeableList from './SwipeableList';
+import SwipeableItem from './SwipeableItem';
+import listWithSwipeable from './listWithSwipeable';
+import itemWithSwipeable from './itemWithSwipeable';
+
+module.exports = {
+  SwipeableList,
+  SwipeableItem,
+  listWithSwipeable,
+  itemWithSwipeable,
+}

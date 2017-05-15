@@ -12,7 +12,7 @@ const ANIMATE_DURATION = 300;
 
 
 
-export const itemWithSwipeable = compose(
+export default compose(
   withState('active', 'setActive', 0),
   lifecycle({
     componentWillMount() {

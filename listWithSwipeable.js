@@ -8,7 +8,7 @@ import {
   PanResponder,
 } from 'react-native';
 
-export const listWithSwipeable = compose(
+export default compose(
   pure,
   withState('panning', 'setPanning', null),
   lifecycle({
