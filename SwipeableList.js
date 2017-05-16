@@ -7,7 +7,9 @@ import listWithSwipeable from './listWithSwipeable';
 
 const SwipeableList = listWithSwipeable(({ 
   panning,
-  setPanning,
+  active,
+  startPanning,
+  endPanning,
   panResponder,
   renderItem,
   keyExtractor,
@@ -15,7 +17,7 @@ const SwipeableList = listWithSwipeable(({
 }) => (
   <FlatList
     scrollEnabled={!panning}
-    renderItem={renderItem({ panning, setPanning, keyExtractor })}
+    renderItem={renderItem({ panning, active, startPanning, endPanning, keyExtractor })}
     keyExtractor={keyExtractor}
     {...flatListProps}
   />

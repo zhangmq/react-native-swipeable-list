@@ -10,10 +10,7 @@ import {
 
 const ANIMATE_DURATION = 300;
 
-
-
 export default compose(
-  withState('active', 'setActive', 0),
   lifecycle({
     componentWillMount() {
       this.state = {
@@ -26,7 +23,7 @@ export default compose(
         },
         onPanResponderGrant: (evt, gestureState) => {
           const { actionsWidth, keyExtractor, item, active } = this.props;
-          this.props.setPanning(() => keyExtractor(item));
+          this.props.startPanning(keyExtractor(item));
           this.state.x.stopAnimation(value => {
             this.state.x.setOffset(active ? -actionsWidth : 0);
             this.state.x.setValue(0);
@@ -37,46 +34,33 @@ export default compose(
           { dx: this.state.x }
         ]),
         onPanResponderRelease: (evt, gestureState) => {
-          const { actionsWidth, active } = this.props;
+          const { actionsWidth, keyExtractor, item, active } = this.props;
           this.state.x.flattenOffset();
           
           const nextActive = active
             ? gestureState.dx < actionsWidth / 2
             : gestureState.dx < -actionsWidth / 2;
 
-          Animated.timing(
-            this.state.x,
-            {
-              toValue: nextActive ? -actionsWidth : 0,
-              duration: ANIMATE_DURATION,
-            }
-          ).start(({ finished }) => {
-            if (!finished) return;
-            if (active !== nextActive) {
-              this.props.setActive(() => nextActive);
-            } else {
-              this.props.setPanning(() => null);
-            }
-          });
+          if (nextActive) {
+            this.props.endPanning(keyExtractor(item));
+          } else {
+            this.props.endPanning(null);
+          }
         },
         onPanResponderTerminationRequest: () => false,
       });
     },
     componentWillReceiveProps(nextProps) {
-      if (!nextProps.panning && this.props.panning) {
+      const { actionsWidth } = nextProps;
+      if (nextProps.active !== this.props.active) {
         this.state.x.stopAnimation(() => {
           Animated.timing(
             this.state.x,
             {
-              toValue: 0,
+              toValue: nextProps.active ? -actionsWidth : 0,
               duration: ANIMATE_DURATION,
             }
-          ).start(({ finished }) => {
-            if (!finished) return;
-            if (this.props.active) {
-              this.props.setActive(() => false);
-            }
-          });
+          ).start();
         });
       }
     },
