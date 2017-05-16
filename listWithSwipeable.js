@@ -21,16 +21,18 @@ export default compose(
       setActive,
     }) => key => {
       setPanning(() => key);
-      setActive(() => null);
+      setActive(() => active === key ? key : null);
     },
     endPanning: ({
       panning,
       active,
       setPanning,
       setActive,
-    }) => key => {
-      setPanning(prevKey => prevKey === key ? null : prevKey);
-      setActive(prevKey => prevKey === key ? key : prevKey);
+    }) => (key, isActive) => {
+      if (panning === key) {
+        setPanning(() => null);
+        setActive(() => isActive ? key : null);
+      }
     }
-  })
+  }),
 );

@@ -36,23 +36,19 @@ export default compose(
         onPanResponderRelease: (evt, gestureState) => {
           const { actionsWidth, keyExtractor, item, active } = this.props;
           this.state.x.flattenOffset();
-          
           const nextActive = active
             ? gestureState.dx < actionsWidth / 2
             : gestureState.dx < -actionsWidth / 2;
-
-          if (nextActive) {
-            this.props.endPanning(keyExtractor(item));
-          } else {
-            this.props.endPanning(null);
-          }
+          this.props.endPanning(keyExtractor(item), nextActive);
         },
         onPanResponderTerminationRequest: () => false,
       });
     },
     componentWillReceiveProps(nextProps) {
       const { actionsWidth } = nextProps;
-      if (nextProps.active !== this.props.active) {
+      if (nextProps.active !== this.props.active 
+        || nextProps.panning !== this.props.panning
+      ) {
         this.state.x.stopAnimation(() => {
           Animated.timing(
             this.state.x,
