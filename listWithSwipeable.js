@@ -11,17 +11,4 @@ import {
 export default compose(
   pure,
   withState('panning', 'setPanning', null),
-  lifecycle({
-    componentWillMount() {
-      this.state = {};
-      this.state.panResponder = PanResponder.create({
-        onStartShouldSetPanResponderCapture: () => this.props.panning,
-        onStartShouldSetPanResponder: () => this.props.panning,
-        onPanResponderGrant: () => {
-          this.props.setPanning(() => null);
-        },
-        onPanResponderTerminationRequest: () => false,
-      });
-    },
-  }),
 );

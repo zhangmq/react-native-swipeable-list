@@ -13,14 +13,12 @@ const SwipeableList = listWithSwipeable(({
   keyExtractor,
   ...flatListProps,
 }) => (
-  <View style={{ flex: 1 }} {...panResponder.panHandlers}>
-    <FlatList
-      scrollEnabled={!panning}
-      renderItem={renderItem({ panning, setPanning, keyExtractor })}
-      keyExtractor={keyExtractor}
-      {...flatListProps}
-    />
-  </View>
+  <FlatList
+    scrollEnabled={!panning}
+    renderItem={renderItem({ panning, setPanning, keyExtractor })}
+    keyExtractor={keyExtractor}
+    {...flatListProps}
+  />
 ));
 
 export default SwipeableList;
