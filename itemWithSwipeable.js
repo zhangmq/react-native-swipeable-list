@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 const ANIMATE_DURATION = 300;
+const CONTENT_TRANSLATEX = 8;
 
 export default compose(
   lifecycle({
@@ -39,6 +40,10 @@ export default compose(
           const nextActive = active
             ? gestureState.dx < actionsWidth / 2
             : gestureState.dx < -actionsWidth / 2;
+          if (Math.abs(gestureState.dx + CONTENT_TRANSLATEX)) {
+            const distance = actionsWidth + CONTENT_TRANSLATEX;
+            this.state.x.setValue(gestureState.dx > 0 ? distance : -distance);
+          }
           this.props.endPanning(keyExtractor(item), nextActive);
         },
         onPanResponderTerminationRequest: () => false,
