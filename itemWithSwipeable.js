@@ -40,7 +40,7 @@ export default compose(
           const nextActive = active
             ? gestureState.dx < actionsWidth / 2
             : gestureState.dx < -actionsWidth / 2;
-          if (Math.abs(gestureState.dx + CONTENT_TRANSLATEX)) {
+          if (Math.abs(gestureState.dx) > actionsWidth + CONTENT_TRANSLATEX) {
             const distance = actionsWidth + CONTENT_TRANSLATEX;
             this.state.x.setValue(gestureState.dx > 0 ? distance : -distance);
           }
