@@ -10,6 +10,7 @@ import {
 
 const ANIMATE_DURATION = 300;
 const CONTENT_TRANSLATEX = 8;
+const useNativeDriver = true;
 
 export default compose(
   lifecycle({
@@ -60,6 +61,7 @@ export default compose(
             {
               toValue: nextProps.active ? -actionsWidth : 0,
               duration: ANIMATE_DURATION,
+              useNativeDriver,
             }
           ).start();
         });
